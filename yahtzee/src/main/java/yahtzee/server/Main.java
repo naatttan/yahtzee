@@ -1,6 +1,4 @@
-package yahtzee;
-
-import yahtzee.server.De;
+package yahtzee.server;
 
 //juste pour tester le dé
 public class Main {
