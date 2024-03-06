@@ -5,14 +5,21 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class JoueurImpl extends UnicastRemoteObject implements Joueur {
     
+    private Partie partie;
     
-    public JoueurImpl() throws RemoteException {
+    public JoueurImpl(Partie partie) throws RemoteException {
         super();
-        
+        this.partie = partie;
     }
 
-    public void selectionnerDes(Des_PDU des) throws RemoteException {
+    // public De[] getDes(){
 
+    // }
+
+
+
+    public void selectionnerDes(Des_PDU des) throws RemoteException {
+        this.partie.lancerDes();
     }
 
     // public String[] verifierFigures();
