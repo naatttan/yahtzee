@@ -15,6 +15,10 @@ public class Partie {
 
     }
 
+    public void run(){
+        
+    }
+
     // Lancer tous les dés qui ne sont pas selectionnés
     public void lancerDes(){
 
