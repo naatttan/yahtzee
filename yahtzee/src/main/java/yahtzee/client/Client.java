@@ -7,7 +7,7 @@ public class Client {
     private String urlServer;
 
     public Client(){
-        this.urlServer = "rmi://" + this.ipServer + ":" + this.portServer;
+        this.urlServer = "rmi://" + this.ipServer + ":" + this.portServer + "/";
         
     }
 

@@ -18,18 +18,18 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
     }
 
     public ArrayList<Integer> demandeSelectionnerDes() throws RemoteException{
-
-        return
+        this.partie.demandeSelectionnerDes();
+        return this.partie.getDesSelectionnes();
     }
 
     public boolean demandeLancerDes() throws RemoteException{
 
-        return
+        return false;
     }
 
     public String demanderEnregistrerFigure() throws RemoteException{
 
-        return
+        return "";
     }
 
     public void lancerPartie() throws RemoteException{
