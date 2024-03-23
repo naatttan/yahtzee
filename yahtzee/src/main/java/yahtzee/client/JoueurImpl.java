@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
 
@@ -27,9 +28,8 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
         return false;
     }
 
-    public String demanderEnregistrerFigure() throws RemoteException{
-
-        return "";
+    public String demanderEnregistrerFigure(List<String> figures) throws RemoteException{
+        return this.partie.demandeEnregistrerFigure(figures);
     }
 
     public void lancerPartie() throws RemoteException{

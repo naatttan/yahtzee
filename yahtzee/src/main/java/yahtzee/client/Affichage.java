@@ -1,6 +1,9 @@
 package yahtzee.client;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Affichage {
@@ -36,10 +39,11 @@ public class Affichage {
     }
 
     public void affichageTitre(){
+        this.effacerConsole();
         System.out.println(this.nomJeu);
     }
 
-    public void affichageDes(){
+    private void affichageDes(){
         int[] des = this.partie.getDes(); 
         String affichage_des = String.format("""
              __      __      __      __      __
@@ -49,7 +53,7 @@ public class Affichage {
         System.out.println(affichage_des);
     }
 
-    public void afficherScores(){
+    private void afficherScores(){
         HashMap<String, HashMap<String, Integer>> grille = this.partie.getGrille();
         System.out.println("|1       |2       |3       |4       |5       |6       |Brelan  |Carre   |Full    |PS      |GS      |Yahtzee |Chance  |");
         for(String joueur : grille.keySet()){
@@ -67,6 +71,26 @@ public class Affichage {
         return score;
     }
 
+    private void afficherOptions(){
+        System.out.println(this.partie.affichageOptions);
+    }
 
+    private void affichageDesSelectionnes(){
+        ArrayList<Integer> selections = this.partie.getDesSelectionnes();
+        Collections.sort(selections);
+        String affichage = "Dés sélectionnés: ";
+        for(int i : selections){
+            affichage += i + ",";
+        }
+        System.out.println(affichage.substring(0, affichage.length()-2));
+    }
+
+    public void affichagePartie(){
+        this.effacerConsole();
+        this.affichageDes();
+        this.afficherScores();
+        this.affichageDesSelectionnes();
+        this.afficherOptions();
+    }
 
 }

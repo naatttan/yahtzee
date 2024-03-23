@@ -3,12 +3,13 @@ package yahtzee.client;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface JoueurClient extends Remote{
 
     public ArrayList<Integer> demandeSelectionnerDes() throws RemoteException;
     public boolean demandeLancerDes() throws RemoteException;
-    public String demanderEnregistrerFigure() throws RemoteException;
+    public String demanderEnregistrerFigure(List<String> figures) throws RemoteException;
 
     public void lancerPartie() throws RemoteException;
 

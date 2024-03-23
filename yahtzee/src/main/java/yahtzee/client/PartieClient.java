@@ -2,6 +2,7 @@ package yahtzee.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import yahtzee.server.De;
@@ -12,9 +13,12 @@ public class PartieClient {
     private int[] des;
     private ArrayList<Integer> desSelectionnes;
     public String affichageOptions;
+    private Client client;
     
 
-    public PartieClient(String[] nomsJoueurs){
+    public PartieClient(Client client, String[] nomsJoueurs){
+        this.client = client;
+        this.client.getAffichage().setPartie(this);
         this.grille = new HashMap<>();
         for(String joueur : nomsJoueurs){
             this.grille.put(joueur, new HashMap<>());
@@ -43,7 +47,37 @@ public class PartieClient {
     }
 
     public void demandeSelectionnerDes(){
-
+        this.affichageOptions = """
+            Quels dés voulez vous sélectionner ? (1, 2, 3, 4, 5). 
+            Ecrivez 'OK' lorsque votre choix est fait.
+                """;
+        this.client.getAffichage().affichagePartie();
+        String clientString = this.lireStringUser();
+        while(!clientString.equalsIgnoreCase("ok")){
+            switch (clientString.toLowerCase()) {
+                case "1":
+                    this.desSelectionnes.add(1);
+                    break;                    
+                case "2":
+                    this.desSelectionnes.add(2);
+                    break;                   
+                case "3":
+                    this.desSelectionnes.add(3);
+                    break;
+                case "4":
+                    this.desSelectionnes.add(4);
+                    break;
+                case "5":
+                    this.desSelectionnes.add(5);
+                    break;
+                case "ok":
+                    break;
+            
+                default:
+                    System.out.println("Ce choix ne fait pas parti des options.");
+                    break;
+            }
+        }        
     }
 
     public void modifierDes(int[] des){
@@ -54,7 +88,22 @@ public class PartieClient {
         return this.desSelectionnes;
     }
 
-    public void demandeEnregistrerFigure(){
-
+    public String demandeEnregistrerFigure(List<String> figures){
+        String options = "Quelle figure voulez vous enregistrer ?\n";
+        for(int i = 1; i<=figures.size(); i++){
+            options += i + "- " + figures.get(i-1);
+        }
+        this.affichageOptions = options;
+        this.client.getAffichage().affichagePartie();
+        int valeurFigure = 0;
+        while(!(valeurFigure <= figures.size() && valeurFigure > 0)){
+            String stringUser = this.lireStringUser();
+            try {
+                valeurFigure = Integer.parseInt(stringUser);
+            } catch (Exception e) {
+                System.out.println("Entrez une valeur numérique.");
+            }
+        }
+        return figures.get(valeurFigure-1);
     }
 }
