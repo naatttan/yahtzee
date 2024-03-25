@@ -1,4 +1,4 @@
-package yahtzee.client;
+package yahtzee.client.client;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -15,7 +15,7 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
     public JoueurImpl(int portRMI, PartieClient partie)  throws RemoteException, MalformedURLException{
         super();
         this.partie = partie;
-        LocateRegistry.createRegistry(portRMI);
+        // LocateRegistry.createRegistry(portRMI);
     }
 
     public ArrayList<Integer> demandeSelectionnerDes() throws RemoteException{
@@ -24,7 +24,7 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
     }
 
     public boolean demandeLancerDes() throws RemoteException{
-
+        
         return false;
     }
 

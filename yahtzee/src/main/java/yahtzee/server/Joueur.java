@@ -17,12 +17,22 @@ import java.net.MalformedURLException;
 // }
 
 public class Joueur{
+    private String nom;
     private Partie partie;
+    private String adresseIP;
+    private int portRMI;
+    private String urlClient;
     
-    public Joueur(Partie partie, int portRMI){
-        this.partie = partie;
+    public Joueur(String adresseIP, int portRMI, String nomJoueur){
+        this.adresseIP = adresseIP;
+        this.portRMI = portRMI;
+        this.nom = nomJoueur;
+        this.urlClient = "rmi://" + this.adresseIP + ":" + this.portRMI + "/";
     }
 
+    public void setPartie(Partie partie){this.partie = partie;}
+
+    public String getNom(){return this.nom;}
     // public De[] getDes(){
 
     // }

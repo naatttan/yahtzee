@@ -1,11 +1,9 @@
-package yahtzee.client;
+package yahtzee.client.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-
-import yahtzee.server.De;
 
 public class PartieClient {
 
@@ -23,13 +21,6 @@ public class PartieClient {
         for(String joueur : nomsJoueurs){
             this.grille.put(joueur, new HashMap<>());
         }
-    }
-
-    public String lireStringUser(){
-        Scanner scanner = new Scanner(System.in);
-        String chaine = scanner.nextLine();
-        scanner.close();
-        return chaine;
     }
 
     public void remplirGrilleJoueur(String nomJoueur, HashMap<String, Integer> grilleJoueur){
@@ -52,7 +43,7 @@ public class PartieClient {
             Ecrivez 'OK' lorsque votre choix est fait.
                 """;
         this.client.getAffichage().affichagePartie();
-        String clientString = this.lireStringUser();
+        String clientString = this.client.lireStringUser();
         while(!clientString.equalsIgnoreCase("ok")){
             switch (clientString.toLowerCase()) {
                 case "1":
@@ -97,7 +88,7 @@ public class PartieClient {
         this.client.getAffichage().affichagePartie();
         int valeurFigure = 0;
         while(!(valeurFigure <= figures.size() && valeurFigure > 0)){
-            String stringUser = this.lireStringUser();
+            String stringUser = this.client.lireStringUser();
             try {
                 valeurFigure = Integer.parseInt(stringUser);
             } catch (Exception e) {
@@ -106,4 +97,5 @@ public class PartieClient {
         }
         return figures.get(valeurFigure-1);
     }
+  
 }

@@ -1,4 +1,4 @@
-package yahtzee.client;
+package yahtzee.server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -1,4 +1,4 @@
-package yahtzee.client;
+package yahtzee.client.client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +23,16 @@ public class Affichage {
 
     public Affichage(Client client){
         this.client = client;
+    }
+
+    public void afficherPartiesDispo(Partie_PDU[] parties){
+        String partiesDispo = "Choisissez une partie: \n";
+        this.effacerConsole();
+        this.affichageTitre();
+        for(int i = 0; i<parties.length; i++){
+            partiesDispo += String.format("%d) %s (%d joueurs) \n", i+1, parties[i].getNomPartie(), parties[i].getNombreJoueurs());
+        }
+        System.out.println(partiesDispo);
     }
 
     private void effacerConsole(){
