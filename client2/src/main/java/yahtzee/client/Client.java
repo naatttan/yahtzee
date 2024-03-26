@@ -15,10 +15,12 @@ public class Client {
     private Affichage affichage;
     private PartieClient partie;
     private JoueurClient joueur;
+    public boolean exit;
 
     public Client(){
         this.urlServer = "rmi://" + this.ipServer + ":" + this.portServer + "/";
         this.affichage = new Affichage(this);
+        this.exit = false;
     }
 
     public Affichage getAffichage(){
@@ -29,6 +31,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         String chaine = scanner.nextLine();
         scanner.close();
+        if(chaine.equalsIgnoreCase("exit")){this.exit = true;}
         return chaine;
     }
 

@@ -16,6 +16,7 @@ public class Server {
     private HashMap<Integer, Thread> threadsParties;
     private ConnexionImpl connexion;
 
+
     // private 
 
     public Server(){

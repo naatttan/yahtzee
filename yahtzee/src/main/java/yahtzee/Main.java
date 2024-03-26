@@ -1,7 +1,13 @@
 package yahtzee;
 
+import yahtzee.server.*;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Server s = new Server();
+        Partie p1 = new Partie(1, 1);
+        s.ajouterPartie(p1);
+        s.lancerParti(p1.getId());
+        s.attendreFinParties();
     }
 }
