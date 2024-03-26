@@ -37,14 +37,14 @@ public class Partie implements Runnable{
     public void addJoueur(Joueur joueur){
         if(!this.partieEnCours && (this.joueurs.size() < this.nomreJoueur)){
             this.joueurs.add(joueur);
-
+            joueur.setPartie(this);
         }
     }
 
     public void run(){
         int timer = 0;
         System.out.println(String.format("Partie %d running...", this.idPartie));
-        while(!(this.joueurs.size() > 0 && timer >= 30) || this.joueurs.size() < this.nomreJoueur){
+        while((this.joueurs.size() < this.nomreJoueur) && (!(this.joueurs.size() > 0 && timer >= 30))){
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -57,13 +57,16 @@ public class Partie implements Runnable{
         this.initialiserPartie();
         while(partieEnCours){
             for(Joueur joueur : this.joueurs){
-                while(! (desSelectionnes.size() < 5)){
+                int nbLance = 0;
+                while(desSelectionnes.size() < 5 && nbLance < 3){
+                    System.out.println("au tour de " + joueur.getNom());
                     joueur.lancerDes();
                     for(Joueur j : this.joueurs){
                         j.afficherDes();
                         if(j != joueur){j.actualiserAffichage();}
                     }
                     joueur.selectionnerDes();
+                    nbLance++;
                 }
                 for(Joueur j : this.joueurs){
                     j.actualiserAffichage();
@@ -74,6 +77,7 @@ public class Partie implements Runnable{
 
     public void initialiserPartie(){
         for(Joueur j : this.joueurs){
+            j.connectionRMI();
             for(Joueur j1 : this.joueurs){
                 j.afficherScore(j1);
             }
@@ -85,15 +89,15 @@ public class Partie implements Runnable{
     // Lancer tous les dés qui ne sont pas selectionnés
     public void lancerDes(){
         for(int i=0; i<this.des.length; i++){
-            if(this.desSelectionnes.contains(i)){
+            if(!this.desSelectionnes.contains(i+1)){
                 this.des[i].lancer();
             }
         }
     }
 
-    public void selectionnerDes(ArrayList<Integer> numDes){
-        for(int num : numDes){
-            this.desSelectionnes.add(num);
-        }
-    }
+    // public void selectionnerDes(ArrayList<Integer> numDes){
+    //     for(int num : numDes){
+    //         this.desSelectionnes.add(num);
+    //     }
+    // }
 }

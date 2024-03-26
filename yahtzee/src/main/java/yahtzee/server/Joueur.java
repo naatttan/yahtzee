@@ -34,13 +34,6 @@ public class Joueur{
         this.portRMI = portRMI;
         this.nom = nomJoueur;
         this.grille = new Grille();
-        this.urlClient = "rmi://" + this.adresseIP + ":" + this.portRMI + "/";
-        try {
-            this.joueurRMI = (JoueurClient) Naming.lookup(urlClient + "joueur");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        
     }
 
     public void setPartie(Partie partie){this.partie = partie;}
@@ -50,14 +43,26 @@ public class Joueur{
     // public De[] getDes(){
 
     // }
-
+    
+    public void connectionRMI(){
+        this.urlClient = "rmi://" + this.adresseIP + ":" + this.portRMI + "/";
+        try {
+            this.joueurRMI = (JoueurClient) Naming.lookup(urlClient + "joueur");
+            System.out.println(this.getNom() + " connecté RMI.");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void selectionnerDes(){
         try {
             ArrayList<Integer> selection = this.joueurRMI.demandeSelectionnerDes();
+            System.out.println("Retour " + selection.size());
             for(int i : selection){
                 if(!this.partie.getDesSelectionnes().contains(i)){
                     this.partie.getDesSelectionnes().add(i);
+                }else{
+                    this.partie.getDesSelectionnes().remove(i);
                 }
             }
         } catch (Exception e) {
@@ -79,7 +84,7 @@ public class Joueur{
             String fig = this.joueurRMI.demanderEnregistrerFigure(this.grille.verifierFigures(this.partie.getValeursDes()));
             this.grille.enregistrerFigure(fig, this.grille.compterPointsFigure(this.partie.getValeursDes(), fig));
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -91,7 +96,7 @@ public class Joueur{
         try {
             this.joueurRMI.actualiserAffichage();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -103,7 +108,7 @@ public class Joueur{
             }
             joueurRMI.afficherScore(grille_pdu);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

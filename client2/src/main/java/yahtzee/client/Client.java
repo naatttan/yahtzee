@@ -64,8 +64,8 @@ public class Client {
         LocateRegistry.createRegistry(portRMI);
         this.partie = new PartieClient(this, parties[valeurPartie-1].getNomsJoueurs());
         this.joueur = new JoueurImpl(portRMI, this.partie);
-        Naming.rebind("rmi://"+this.IP_CLIENT+":"+ portRMI +"/joueur", conn);
-        System.out.println("RMI: " + portRMI);
+        Naming.rebind("rmi://" + this.IP_CLIENT + ":" + portRMI + "/joueur", this.joueur);
+        // System.out.println("RMI: " + portRMI);
     }
 
 }

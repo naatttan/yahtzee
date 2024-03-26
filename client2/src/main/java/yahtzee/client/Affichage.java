@@ -38,9 +38,11 @@ public class Affichage {
 
     private void effacerConsole(){
         try{
-            Process clear = new ProcessBuilder("clear").start();
-            clear.waitFor();
-        }catch(IOException | InterruptedException e){
+            // Process clear = new ProcessBuilder("clear").start();
+            // clear.waitFor();
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        }catch(Exception e){
             System.out.println(e);
         }
     }
@@ -89,11 +91,11 @@ public class Affichage {
     private void affichageDesSelectionnes(){
         ArrayList<Integer> selections = this.partie.getDesSelectionnes();
         Collections.sort(selections);
-        String affichage = "Dés sélectionnés: ";
+        String affichage = "\nDés sélectionnés: ";
         for(int i : selections){
             affichage += i + ",";
         }
-        System.out.println(affichage.substring(0, affichage.length()-2));
+        System.out.println(affichage.substring(0, affichage.length()-1));
     }
 
     public void affichagePartie(){

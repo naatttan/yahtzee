@@ -18,6 +18,7 @@ public class PartieClient {
         this.client = client;
         this.client.getAffichage().setPartie(this);
         this.grille = new HashMap<>();
+        this.desSelectionnes = new ArrayList<>();
         for(String joueur : nomsJoueurs){
             this.grille.put(joueur, new HashMap<>());
         }
@@ -28,6 +29,9 @@ public class PartieClient {
     }
 
     public void remplirGrilleJoueur(String nomJoueur, HashMap<String, Integer> grilleJoueur){
+        if(!this.grille.containsKey(nomJoueur)){
+            this.grille.put(nomJoueur, new HashMap<>());
+        }
         for(String figure : grilleJoueur.keySet()){
             this.grille.get(nomJoueur).put(figure, grilleJoueur.get(figure));
         }
@@ -47,23 +51,29 @@ public class PartieClient {
             Ecrivez 'OK' lorsque votre choix est fait.
                 """;
         this.client.getAffichage().affichagePartie();
-        String clientString = this.client.lireStringUser();
+        String clientString = "";
         while(!clientString.equalsIgnoreCase("ok")){
+            clientString = this.client.lireStringUser();
             switch (clientString.toLowerCase()) {
                 case "1":
-                    this.desSelectionnes.add(1);
+                    if(!this.desSelectionnes.contains(1))
+                        this.desSelectionnes.add(1);
                     break;                    
                 case "2":
-                    this.desSelectionnes.add(2);
+                    if(!this.desSelectionnes.contains(2))
+                        this.desSelectionnes.add(2);
                     break;                   
                 case "3":
-                    this.desSelectionnes.add(3);
+                    if(!this.desSelectionnes.contains(3))
+                        this.desSelectionnes.add(3);
                     break;
                 case "4":
-                    this.desSelectionnes.add(4);
+                    if(!this.desSelectionnes.contains(4))
+                        this.desSelectionnes.add(4);
                     break;
                 case "5":
-                    this.desSelectionnes.add(5);
+                    if(!this.desSelectionnes.contains(5))
+                        this.desSelectionnes.add(5);
                     break;
                 case "ok":
                     break;
