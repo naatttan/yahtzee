@@ -43,12 +43,14 @@ public class Partie implements Runnable{
 
     public void run(){
         int timer = 0;
-        while(!(this.joueurs.size() > 1 && timer >= 30) || this.joueurs.size() < this.nomreJoueur){
+        System.out.println(String.format("Partie %d running...", this.idPartie));
+        while(!(this.joueurs.size() > 0 && timer >= 30) || this.joueurs.size() < this.nomreJoueur){
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
                 
             }
+            System.out.print("*");
             timer++;
         }
         this.partieEnCours = true;

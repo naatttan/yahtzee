@@ -7,6 +7,7 @@ import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.MalformedURLException;
+import yahtzee.*;
 // import utilities.*;
 
 // public interface Joueur {

@@ -1,4 +1,4 @@
-package yahtzee.server;
+package yahtzee;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteServer;
@@ -6,7 +6,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Random;
 
-import yahtzee.Connexion;
+import yahtzee.server.Joueur;
+import yahtzee.server.Partie;
+import yahtzee.server.Server;
 
 
 public class ConnexionImpl extends UnicastRemoteObject implements Connexion {
@@ -18,7 +20,8 @@ public class ConnexionImpl extends UnicastRemoteObject implements Connexion {
         this.server = server;
     }
 
-    public Partie_PDU[] demanderVoirParties() throws RemoteException{
+    @Override
+    public Partie_PDU[] demanderVoirParties() throws RemoteException {
         HashMap<Integer, Partie> listePartie = this.server.getListeParties();
         Partie_PDU[] listPartie_PDUs = new Partie_PDU[listePartie.values().size()];
         int i = 0;
@@ -33,6 +36,7 @@ public class ConnexionImpl extends UnicastRemoteObject implements Connexion {
         return listPartie_PDUs;
     }
 
+    @Override
     public int connecterPartie(int idPartie, String nomUser) throws RemoteException{
         int rmiPort;
         Random random = new Random();
@@ -40,7 +44,7 @@ public class ConnexionImpl extends UnicastRemoteObject implements Connexion {
         try {
             ipClient = RemoteServer.getClientHost();
         } catch (Exception e) {
-            System.out.println("Erreur connection: " + e);
+            e.printStackTrace();
         }
         rmiPort = random.nextInt(4001 - 2000) + 2000;
         while(this.server.getListeClients().containsValue(rmiPort)){

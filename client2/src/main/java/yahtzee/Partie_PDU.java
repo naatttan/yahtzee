@@ -1,4 +1,4 @@
-package yahtzee.server;
+package yahtzee;
 
 import java.io.Serializable;
 

@@ -8,7 +8,7 @@ public class Main {
         try {
             c.connectServer();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         while(!c.exit){
             try {

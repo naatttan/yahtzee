@@ -1,4 +1,4 @@
-package yahtzee.client;
+package yahtzee;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -6,6 +6,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import yahtzee.client.*;;
 
 public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
 

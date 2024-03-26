@@ -5,6 +5,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.HashMap;
 
+import yahtzee.ConnexionImpl;
+
 public class Server {
 
     private final int PORT_RMI = 1099;

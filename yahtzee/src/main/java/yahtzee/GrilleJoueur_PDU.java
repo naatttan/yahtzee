@@ -1,12 +1,10 @@
-package yahtzee.server;
+package yahtzee;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
+public class GrilleJoueur_PDU implements Serializable{
 
-
-
-class GrilleJoueur_PDU implements Serializable{
     private String nomJoueur;
     private HashMap<String, Integer> grille;
 
