@@ -25,6 +25,8 @@ public class Grille {
         this.figures.put("Yahtzee", 0);
         this.figures.put("Chance", 0);
     }
+
+    public HashMap<String, Integer> getFigures(){return this.figures;}    
     
     public void enregistrerFigure(String figure, int points){
         this.figures.put(figure, points);

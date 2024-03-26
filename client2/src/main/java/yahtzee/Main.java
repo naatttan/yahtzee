@@ -1,4 +1,4 @@
-package yahtzee.client;
+package yahtzee;
 
 public class Main {
     public static void main(String[] args) {

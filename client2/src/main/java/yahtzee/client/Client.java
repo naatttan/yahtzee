@@ -1,4 +1,4 @@
-package yahtzee.client.client;
+package yahtzee.client;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

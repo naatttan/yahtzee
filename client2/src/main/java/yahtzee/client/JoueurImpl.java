@@ -1,4 +1,4 @@
-package yahtzee.client.client;
+package yahtzee.client;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -42,5 +42,9 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
 
     public void afficherDes(int[] des) throws RemoteException{
         this.partie.modifierDes(des);
+    }
+
+    public void actualiserAffichage()throws RemoteException{
+        this.partie.actualiserAffichage();
     }
 }

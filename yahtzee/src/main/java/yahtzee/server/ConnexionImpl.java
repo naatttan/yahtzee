@@ -6,6 +6,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Random;
 
+import yahtzee.Connexion;
+
 
 public class ConnexionImpl extends UnicastRemoteObject implements Connexion {
     

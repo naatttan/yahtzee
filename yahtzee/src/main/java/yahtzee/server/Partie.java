@@ -1,7 +1,7 @@
 package yahtzee.server;
 import java.util.ArrayList;
 
-public class Partie {
+public class Partie implements Runnable{
     
     private int idPartie;
     private De[] des;
@@ -25,6 +25,14 @@ public class Partie {
     public int getId(){return this.idPartie;}
     public int getNombreJoueurs(){return this.joueurs.size();}
     public ArrayList<Joueur> getJoueurs(){return this.joueurs;}
+    public ArrayList<Integer> getDesSelectionnes(){return this.desSelectionnes;}
+    public De[] getDes(){return this.des;}
+    public int[] getValeursDes() {
+        int[] vals = new int[this.des.length];
+        for(int i=0; i<this.des.length; i++){vals[i] = this.des[i].getValeur();}
+        return vals; 
+    }
+
 
     public void addJoueur(Joueur joueur){
         if(!this.partieEnCours && (this.joueurs.size() < this.nomreJoueur)){
@@ -44,13 +52,31 @@ public class Partie {
             timer++;
         }
         this.partieEnCours = true;
+        this.initialiserPartie();
         while(partieEnCours){
             for(Joueur joueur : this.joueurs){
                 while(! (desSelectionnes.size() < 5)){
                     joueur.lancerDes();
+                    for(Joueur j : this.joueurs){
+                        j.afficherDes();
+                        if(j != joueur){j.actualiserAffichage();}
+                    }
                     joueur.selectionnerDes();
                 }
+                for(Joueur j : this.joueurs){
+                    j.actualiserAffichage();
+                }
             }
+        }
+    }
+
+    public void initialiserPartie(){
+        for(Joueur j : this.joueurs){
+            for(Joueur j1 : this.joueurs){
+                j.afficherScore(j1);
+            }
+            j.afficherDes();
+            j.actualiserAffichage();
         }
     }
 

@@ -1,4 +1,4 @@
-package yahtzee.client.client;
+package yahtzee.client;
 
 import java.io.IOException;
 import java.util.ArrayList;

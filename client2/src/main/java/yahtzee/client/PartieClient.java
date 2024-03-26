@@ -1,4 +1,4 @@
-package yahtzee.client.client;
+package yahtzee.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +21,10 @@ public class PartieClient {
         for(String joueur : nomsJoueurs){
             this.grille.put(joueur, new HashMap<>());
         }
+    }
+
+    public void actualiserAffichage(){
+        this.client.getAffichage().affichagePartie();
     }
 
     public void remplirGrilleJoueur(String nomJoueur, HashMap<String, Integer> grilleJoueur){
