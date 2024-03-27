@@ -22,6 +22,22 @@ public class Affichage {
                                                                
             """;
 
+    private String[] figures = {
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "brelan",
+        "carre",
+        "full",
+        "petite suite",
+        "grande suite",
+        "yahtzee",
+        "chance"
+    };
+
     public Affichage(Client client){
         this.client = client;
     }
@@ -76,8 +92,8 @@ public class Affichage {
 
     private String valeursScoreJoueur(HashMap<String, Integer> scoreJoueur){
         String score = "";
-        for(int i : scoreJoueur.values()){
-            String nb = Integer.toString(i);
+        for(String i : this.figures){
+            String nb = Integer.toString(scoreJoueur.get(i));
             score += "|" + nb + " ".repeat(8 - nb.length());
         }
         score += "|";
@@ -92,14 +108,19 @@ public class Affichage {
         ArrayList<Integer> selections = this.partie.getDesSelectionnes();
         Collections.sort(selections);
         String affichage = "\nDés sélectionnés: ";
-        for(int i : selections){
-            affichage += i + ",";
+        if(selections.isEmpty()){
+            affichage += "Aucun ";
+        }else{
+            for(int i : selections){
+                affichage += i + ",";
+            }
         }
         System.out.println(affichage.substring(0, affichage.length()-1));
     }
 
     public void affichagePartie(){
         this.effacerConsole();
+        this.affichageTitre();
         this.affichageDes();
         this.afficherScores();
         this.affichageDesSelectionnes();

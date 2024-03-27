@@ -43,6 +43,7 @@ public class Partie implements Runnable{
 
     public void run(){
         int timer = 0;
+        int nbLance;
         System.out.println(String.format("Partie %d running...", this.idPartie));
         while((this.joueurs.size() < this.nomreJoueur) && (!(this.joueurs.size() > 0 && timer >= 30))){
             try {
@@ -57,7 +58,8 @@ public class Partie implements Runnable{
         this.initialiserPartie();
         while(partieEnCours){
             for(Joueur joueur : this.joueurs){
-                int nbLance = 0;
+                nbLance = 0;
+                this.desSelectionnes.clear();
                 while(desSelectionnes.size() < 5 && nbLance < 3){
                     System.out.println("au tour de " + joueur.getNom());
                     joueur.lancerDes();
@@ -68,7 +70,9 @@ public class Partie implements Runnable{
                     joueur.selectionnerDes();
                     nbLance++;
                 }
+                joueur.enregistrerFigure();
                 for(Joueur j : this.joueurs){
+                    j.afficherScore(joueur);
                     j.actualiserAffichage();
                 }
             }

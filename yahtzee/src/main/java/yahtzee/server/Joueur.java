@@ -57,13 +57,14 @@ public class Joueur{
     public void selectionnerDes(){
         try {
             ArrayList<Integer> selection = this.joueurRMI.demandeSelectionnerDes();
-            System.out.println("Retour " + selection.size());
+            System.out.println("Retour " + selection);
+            this.partie.getDesSelectionnes().clear();
             for(int i : selection){
-                if(!this.partie.getDesSelectionnes().contains(i)){
-                    this.partie.getDesSelectionnes().add(i);
-                }else{
-                    this.partie.getDesSelectionnes().remove(i);
-                }
+                this.partie.getDesSelectionnes().add(i);
+                
+                // if(!this.partie.getDesSelectionnes().contains(i)){
+                //     this.partie.getDesSelectionnes().add(i);
+                // }
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -73,7 +74,7 @@ public class Joueur{
 
     public void afficherDes(){
         try {
-            this.joueurRMI.afficherDes(this.partie.getValeursDes());
+            this.joueurRMI.afficherDes(this.partie.getValeursDes(), this.partie.getDesSelectionnes());
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -82,7 +83,8 @@ public class Joueur{
     public void enregistrerFigure(){
         try {
             String fig = this.joueurRMI.demanderEnregistrerFigure(this.grille.verifierFigures(this.partie.getValeursDes()));
-            this.grille.enregistrerFigure(fig, this.grille.compterPointsFigure(this.partie.getValeursDes(), fig));
+            System.out.println("Retour " + fig);
+            this.grille.enregistrerFigure(fig.toLowerCase(), this.grille.compterPointsFigure(this.partie.getValeursDes(), fig.toLowerCase()));
         } catch (Exception e) {
             e.printStackTrace();
         }

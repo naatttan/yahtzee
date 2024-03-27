@@ -15,7 +15,7 @@ public interface JoueurClient extends Remote{
     public void lancerPartie() throws RemoteException;
 
     public void afficherScore(GrilleJoueur_PDU score_joueur) throws RemoteException;
-    public void afficherDes(int[] des) throws RemoteException;
+    public void afficherDes(int[] des, ArrayList<Integer> selection) throws RemoteException;
     public void actualiserAffichage()throws RemoteException;
     
 }

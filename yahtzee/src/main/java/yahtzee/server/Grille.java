@@ -11,19 +11,19 @@ public class Grille {
 
     public Grille(){
         this.figures = new HashMap<>();
-        this.figures.put("As", 0);
-        this.figures.put("Deux", 0);
-        this.figures.put("Trois", 0);
-        this.figures.put("Quatre", 0);
-        this.figures.put("Cinq", 0);
-        this.figures.put("Six", 0);
-        this.figures.put("Brelan", 0);
-        this.figures.put("Carré", 0);
-        this.figures.put("Full", 0);
-        this.figures.put("Petite Suite", 0);
-        this.figures.put("Grande Suite", 0);
-        this.figures.put("Yahtzee", 0);
-        this.figures.put("Chance", 0);
+        this.figures.put("1", 0);
+        this.figures.put("2", 0);
+        this.figures.put("3", 0);
+        this.figures.put("4", 0);
+        this.figures.put("5", 0);
+        this.figures.put("6", 0);
+        this.figures.put("brelan", 0);
+        this.figures.put("carre", 0);
+        this.figures.put("full", 0);
+        this.figures.put("petite suite", 0);
+        this.figures.put("grande suite", 0);
+        this.figures.put("yahtzee", 0);
+        this.figures.put("chance", 0);
     }
 
     public HashMap<String, Integer> getFigures(){return this.figures;}    
@@ -48,31 +48,31 @@ public class Grille {
     public Integer compterPointsFigure(int[] des, String figure){
         // Vérifier quelle figure est demandée
         switch (figure) {
-            case "As":
+            case "1":
                 return sommeValeursDes(des, 1);
-            case "Deux":
+            case "2":
                 return sommeValeursDes(des, 2);
-            case "Trois":
+            case "3":
                 return sommeValeursDes(des, 3);
-            case "Quatre":
+            case "4":
                 return sommeValeursDes(des, 4);
-            case "Cinq":
+            case "5":
                 return sommeValeursDes(des, 5);
-            case "Six":
+            case "6":
                 return sommeValeursDes(des, 6);
-            case "Brelan":
+            case "brelan":
                 return sommeDes(des);
-            case "Carré":
+            case "carre":
                 return sommeDes(des);
-            case "Full":
+            case "full":
                 return 25;
-            case "Petite Suite":
+            case "petite suite":
                 return 30;
-            case "Grande Suite":
+            case "grande suite":
                 return 40;
-            case "Yahtzee":
+            case "yahtzee":
                 return 50;
-            case "Chance":
+            case "chance":
                 return sommeDes(des);
             default:
                 return 0;
@@ -83,22 +83,22 @@ public class Grille {
         List<String> figures = new ArrayList<>();
         Arrays.sort(des); // Trier les dés pour simplifier la vérification de certaines figures
 
-        if (estYahtzee(des)) {
+        if (estYahtzee(des) && this.figures.get("yahtzee") == 0) {
             figures.add("Yahtzee");
         }
-        if (estGrandeSuite(des)) {
+        if (estGrandeSuite(des) && this.figures.get("grande suite") == 0) {
             figures.add("Grande Suite");
         }
-        if (estPetiteSuite(des)) {
+        if (estPetiteSuite(des) && this.figures.get("petite suite") == 0) {
             figures.add("Petite Suite");
         }
-        if (estFull(des)) {
+        if (estFull(des) && this.figures.get("full") == 0) {
             figures.add("Full");
         }
-        if (estCarré(des)) {
-            figures.add("Carré");
+        if (estCarré(des) && this.figures.get("carre") == 0) {
+            figures.add("Carre");
         }
-        if (estBrelan(des)) {
+        if (estBrelan(des) && this.figures.get("brelan") == 0) {
             figures.add("Brelan");
         }
 
@@ -149,7 +149,7 @@ public class Grille {
     private void ajouterFiguresNormales(int[] des, List<String> figures) {
         for (int i = 1; i <= 6; i++) {
             
-            if (estDansTableau(i, des)){ 
+            if (estDansTableau(i, des) && this.figures.get(String.valueOf(i)) == 0){ 
                 figures.add(String.valueOf(i));
             }
         }

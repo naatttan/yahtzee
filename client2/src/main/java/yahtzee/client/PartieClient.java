@@ -24,7 +24,15 @@ public class PartieClient {
         }
     }
 
+
+    public void setDesSelectionnes(ArrayList<Integer> selection){
+        this.desSelectionnes.clear();
+        for(int i : selection)
+            this.desSelectionnes.add(i);
+    }
+
     public void actualiserAffichage(){
+        this.affichageOptions = "";
         this.client.getAffichage().affichagePartie();
     }
 
@@ -32,6 +40,7 @@ public class PartieClient {
         if(!this.grille.containsKey(nomJoueur)){
             this.grille.put(nomJoueur, new HashMap<>());
         }
+        this.grille.get(nomJoueur).clear();
         for(String figure : grilleJoueur.keySet()){
             this.grille.get(nomJoueur).put(figure, grilleJoueur.get(figure));
         }
@@ -45,7 +54,8 @@ public class PartieClient {
         return this.des;
     }
 
-    public void demandeSelectionnerDes(){
+    public ArrayList<Integer> demandeSelectionnerDes(){
+        ArrayList<Integer> liste = this.desSelectionnes;
         this.affichageOptions = """
             Quels dés voulez vous sélectionner ? (1, 2, 3, 4, 5). 
             Ecrivez 'OK' lorsque votre choix est fait.
@@ -56,24 +66,40 @@ public class PartieClient {
             clientString = this.client.lireStringUser();
             switch (clientString.toLowerCase()) {
                 case "1":
-                    if(!this.desSelectionnes.contains(1))
-                        this.desSelectionnes.add(1);
+                    if(!liste.contains(1)){
+                        liste.add(1);
+                    }else{
+                        liste.remove(liste.indexOf(1));
+                    }
+                         
                     break;                    
                 case "2":
-                    if(!this.desSelectionnes.contains(2))
-                        this.desSelectionnes.add(2);
+                    if(!liste.contains(2)){
+                        liste.add(2);
+                    }else{
+                        liste.remove(liste.indexOf(2));
+                    }
                     break;                   
                 case "3":
-                    if(!this.desSelectionnes.contains(3))
-                        this.desSelectionnes.add(3);
+                    if(!liste.contains(3)){
+                        liste.add(3);
+                    }else{
+                        liste.remove(liste.indexOf(3));
+                    }
                     break;
                 case "4":
-                    if(!this.desSelectionnes.contains(4))
-                        this.desSelectionnes.add(4);
+                    if(!liste.contains(4)){
+                        liste.add(4);
+                    }else{
+                        liste.remove(liste.indexOf(4));
+                    }
                     break;
                 case "5":
-                    if(!this.desSelectionnes.contains(5))
-                        this.desSelectionnes.add(5);
+                    if(!liste.contains(5)){
+                        liste.add(5);
+                    }else{
+                        liste.remove(liste.indexOf(5));
+                    }
                     break;
                 case "ok":
                     break;
@@ -82,7 +108,8 @@ public class PartieClient {
                     System.out.println("Ce choix ne fait pas parti des options.");
                     break;
             }
-        }        
+        } 
+        return liste;       
     }
 
     public void modifierDes(int[] des){
@@ -96,7 +123,7 @@ public class PartieClient {
     public String demandeEnregistrerFigure(List<String> figures){
         String options = "Quelle figure voulez vous enregistrer ?\n";
         for(int i = 1; i<=figures.size(); i++){
-            options += i + "- " + figures.get(i-1);
+            options += i + "- " + figures.get(i-1) + "\n";
         }
         this.affichageOptions = options;
         this.client.getAffichage().affichagePartie();

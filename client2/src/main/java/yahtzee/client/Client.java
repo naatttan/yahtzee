@@ -51,6 +51,8 @@ public class Client {
         this.affichage.afficherPartiesDispo(parties);
         int valeurPartie = 0;
         while(!(valeurPartie <= parties.length && valeurPartie > 0)){
+            parties = conn.demanderVoirParties();
+            this.affichage.afficherPartiesDispo(parties);
             String userString = this.lireStringUser();
             try {
                 valeurPartie = Integer.parseInt(userString);

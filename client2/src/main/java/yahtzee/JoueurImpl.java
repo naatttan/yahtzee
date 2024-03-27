@@ -20,8 +20,8 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
     }
 
     public ArrayList<Integer> demandeSelectionnerDes() throws RemoteException{
-        this.partie.demandeSelectionnerDes();
-        return this.partie.getDesSelectionnes();
+        return this.partie.demandeSelectionnerDes();
+        // return this.partie.getDesSelectionnes();
     }
 
     public boolean demandeLancerDes() throws RemoteException{
@@ -41,8 +41,9 @@ public class JoueurImpl extends UnicastRemoteObject implements JoueurClient  {
         this.partie.remplirGrilleJoueur(score_joueur.getJoueur(), score_joueur.getGrille());
     }
 
-    public void afficherDes(int[] des) throws RemoteException{
+    public void afficherDes(int[] des, ArrayList<Integer> selection) throws RemoteException{
         this.partie.modifierDes(des);
+        this.partie.setDesSelectionnes(selection);
     }
 
     public void actualiserAffichage()throws RemoteException{
